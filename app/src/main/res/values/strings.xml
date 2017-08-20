@@ -6,7 +6,7 @@
     <string name="input_BDP">请输入双顶径</string>
     <string name="input_AC">请输入腹围</string>
     <string name="input_FL">请输入股骨长</string>
-    <string name="unit_cm">CM</string>
+    <string name="unit_cm">mm</string>
     <string name="this_week_value">当周参考值：</string>
     <string name="hint">(以上数据可以查询B超单)</string>
     <string name="result">计算结果</string>

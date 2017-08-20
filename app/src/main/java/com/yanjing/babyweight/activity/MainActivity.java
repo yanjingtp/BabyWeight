@@ -12,6 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yanjing.babyweight.R;
+import com.yanjing.babyweight.bean.WeightBean;
+import com.yanjing.babyweight.utils.WeightDBUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_result)
     Button btnResult;
 
-    private SharedPreferences sp ;
+    private SharedPreferences sp;
+    private WeightDBUtil dbUtil;
+    private List<WeightBean> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +53,15 @@ public class MainActivity extends AppCompatActivity {
         btnResult.setOnClickListener(new MyOnClickLister());
 
         sp = getSharedPreferences("week", MODE_PRIVATE);
+        dbUtil = new WeightDBUtil(this);
 
         String week = sp.getString("current_week", "13");
-        tvWeek.setText("第"+week+"周");
+        tvWeek.setText("第" + week + "周");
+
+        list = dbUtil.getData(week);
+        tvThisBDP.setText("当周参考值:" + list.get(0).getBDP() + "mm");
+        tvThisAC.setText("当周参考值:" + list.get(0).getAC() + "mm");
+        tvThisFL.setText("当周参考值:" + list.get(0).getFL() + "mm");
 
 
     }
@@ -83,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
                                     } else {
                                         tvWeek.setText("第" + week + "周");
                                         sp.edit().putString("current_week", week).commit();
+
+                                        //刷新显示参考值
+                                        list.clear();
+                                        list.addAll(dbUtil.getData(week));
+                                        tvThisBDP.setText("当周参考值:" + list.get(0).getBDP() + "mm");
+                                        tvThisAC.setText("当周参考值:" + list.get(0).getAC() + "mm");
+                                        tvThisFL.setText("当周参考值:" + list.get(0).getFL() + "mm");
+
                                         dialogEdit.dismiss();
                                     }
 
@@ -134,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                        tvWeight.setText(String.format("%.2f", result * 2 / 1000) + "斤/" + String.format("%.2f", result / 1000) + "公斤");
+                        tvWeight.setText(String.format("%.2f", result * 2 / 1000 / 1000) + "斤/" + String.format("%.2f", result / 1000 / 1000) + "公斤");
                         dialogShow.show();
                     }
 
