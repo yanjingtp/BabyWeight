@@ -1,4 +1,4 @@
-package com.yanjing.babyweight;
+package com.yanjing.babyweight.activity;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.yanjing.babyweight.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

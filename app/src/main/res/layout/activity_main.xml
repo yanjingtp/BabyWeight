@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/bkg"
     android:orientation="vertical"
-    tools:context="com.yanjing.babyweight.MainActivity">
+    tools:context="com.yanjing.babyweight.activity.MainActivity">
 
     <TextView
         android:layout_width="match_parent"

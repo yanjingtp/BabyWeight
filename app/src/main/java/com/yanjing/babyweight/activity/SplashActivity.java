@@ -7,9 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.yanjing.babyweight.MainActivity;
 import com.yanjing.babyweight.R;
 
 import java.util.Timer;
