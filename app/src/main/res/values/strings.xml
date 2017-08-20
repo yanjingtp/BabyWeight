@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">宝宝体重计算</string>
+    <string name="current_week">当前孕周数</string>
+    <string name="input_week">第10周</string>
+    <string name="input_click">点击上方设置</string>
+    <string name="input_BDP">请输入双顶径</string>
+    <string name="input_AC">请输入腹围</string>
+    <string name="input_FL">请输入股骨长</string>
+    <string name="unit_cm">CM</string>
+    <string name="this_week_value">当周参考值：</string>
+    <string name="hint">(以上数据可以查询B超单)</string>
+    <string name="result">计算结果</string>
+    <string name="show_hint">您宝宝的当前体重是：</string>
+    <string name="input_current_week">请输入孕周数:</string>
+    <string name="input_hint">孕周数大于13小于40</string>
+
+</resources>
