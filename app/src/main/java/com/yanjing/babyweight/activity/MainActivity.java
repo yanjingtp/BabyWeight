@@ -59,9 +59,11 @@ public class MainActivity extends AppCompatActivity {
         tvWeek.setText("第" + week + "周");
 
         list = dbUtil.getData(week);
-        tvThisBDP.setText("当周参考值:" + list.get(0).getBDP() + "mm");
-        tvThisAC.setText("当周参考值:" + list.get(0).getAC() + "mm");
-        tvThisFL.setText("当周参考值:" + list.get(0).getFL() + "mm");
+        if (list.size() > 0) {
+            tvThisBDP.setText("当周参考值:" + list.get(0).getBDP().replace("||", "±") + "mm");
+            tvThisAC.setText("当周参考值:" + list.get(0).getAC().replace("||", "±") + "mm");
+            tvThisFL.setText("当周参考值:" + list.get(0).getFL().replace("||", "±") + "mm");
+        }
 
 
     }
@@ -99,9 +101,11 @@ public class MainActivity extends AppCompatActivity {
                                         //刷新显示参考值
                                         list.clear();
                                         list.addAll(dbUtil.getData(week));
-                                        tvThisBDP.setText("当周参考值:" + list.get(0).getBDP() + "mm");
-                                        tvThisAC.setText("当周参考值:" + list.get(0).getAC() + "mm");
-                                        tvThisFL.setText("当周参考值:" + list.get(0).getFL() + "mm");
+                                        if (list.size() > 0) {
+                                            tvThisBDP.setText("当周参考值:" + list.get(0).getBDP().replace("||", "±") + "mm");
+                                            tvThisAC.setText("当周参考值:" + list.get(0).getAC().replace("||", "±") + "mm");
+                                            tvThisFL.setText("当周参考值:" + list.get(0).getFL().replace("||", "±") + "mm");
+                                        }
 
                                         dialogEdit.dismiss();
                                     }

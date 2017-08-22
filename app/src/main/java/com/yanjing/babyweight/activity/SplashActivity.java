@@ -8,13 +8,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.yanjing.babyweight.R;
 import com.yanjing.babyweight.bean.WeightBean;
+import com.yanjing.babyweight.utils.MyURL;
 import com.yanjing.babyweight.utils.WeightDBUtil;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -216,7 +222,7 @@ public class SplashActivity extends Activity {
         sp = getSharedPreferences("weight", MODE_PRIVATE);
         if (sp.getBoolean("isFirst", true)) {
             initJson();
-            sp.edit().putBoolean("isFirst", false).commit();
+
         }
 
 
@@ -251,9 +257,24 @@ public class SplashActivity extends Activity {
     }
 
     private void initJson() {
-        Gson gson = new Gson();
-        WeightBean bean = gson.fromJson(json, WeightBean.class);
-        dbUtil.save(bean);
+        RequestQueue queue = Volley.newRequestQueue(SplashActivity.this);
+        StringRequest request = new StringRequest(MyURL.weightInfo, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                WeightBean bean = gson.fromJson(response, WeightBean.class);
+
+                dbUtil.save(bean);
+                sp.edit().putBoolean("isFirst", false).commit();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(SplashActivity.this,"数据加载错误，请稍后重试……",Toast.LENGTH_SHORT).show();
+                sp.edit().putBoolean("isFirst", true).commit();
+            }
+        });
+        queue.add(request);
 
     }
 
